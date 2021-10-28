@@ -667,3 +667,11 @@ func (c *Client) ListCiliumEgressNATPolicies(ctx context.Context, opts metav1.Li
 func (c *Client) ListCiliumLocalRedirectPolicies(ctx context.Context, namespace string, opts metav1.ListOptions) (*ciliumv2.CiliumLocalRedirectPolicyList, error) {
 	return c.CiliumClientset.CiliumV2().CiliumLocalRedirectPolicies(namespace).List(ctx, opts)
 }
+
+func (c *Client) CreateIngressClass(ctx context.Context, ingressClass *networkingv1.IngressClass, opts metav1.CreateOptions) (*networkingv1.IngressClass, error) {
+	return c.Clientset.NetworkingV1().IngressClasses().Create(ctx, ingressClass, opts)
+}
+
+func (c *Client) DeleteIngressClass(ctx context.Context, name string, opts metav1.DeleteOptions) error {
+	return c.Clientset.NetworkingV1().IngressClasses().Delete(ctx, name, opts)
+}
